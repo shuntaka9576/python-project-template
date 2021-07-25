@@ -1,0 +1,32 @@
+name: ci python-project-template
+env:
+  PROJECT_NAME: python-project-template
+on: [push]
+jobs:
+  deploy:
+    name: CI
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+      - name: Install Packages
+        run: |
+          poetry install
+      - name: Run Lint
+        run: |
+          poetry run pysen run lint
+      - name: Run Test
+        run: |
+          poetry run pytest
