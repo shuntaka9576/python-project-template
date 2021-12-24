@@ -28,3 +28,21 @@ production
 ```bash
 poetry install --no-dev
 ```
+
+### Run Lint
+
+```bash
+poetry run pysen run lint
+```
+
+### Run format
+
+```bash
+poetry run pysen run format
+```
+
+### Run Test
+
+```bash
+poetry run pytest
+```
