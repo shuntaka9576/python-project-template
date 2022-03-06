@@ -2,7 +2,7 @@ start:
 	if [ -n "${ENV}" ]; then \
 		.venv/bin/dotenv --file ${ENV} run -- .venv/bin/python src/main.py; \
 	else \
-		.venv/bin/dotenv --file .env.kiryu run -- .venv/bin/python src/main.py; \
+		.venv/bin/dotenv --file .env.dev run -- .venv/bin/python src/main.py; \
 	fi
 
 lint:
